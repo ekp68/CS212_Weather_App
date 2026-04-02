@@ -3,8 +3,11 @@ $(document).ready(function () {
     // Default background
     $("#app-body").addClass("default-bg");
 
-    $("#searchBtn").click(function () {
+    $("form").on("submit", function (event) {
+        event.preventDefault();
+        
         let location = $("#locationInput").val();
+        $("#locationInput").val("");
 
         if (location === "") {
             alert("Please enter a city.");
