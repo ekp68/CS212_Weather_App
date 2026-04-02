@@ -4,7 +4,8 @@
 - Kelvin Winney – Layout / Background System
 - Evan Paddock – Location Input
 - James Darcy – Weather Details
-- Nick Sondermeyer – Weather Display / Icons
+- Nick Sondermeyer – Weather Display
+- Jacob Parks - Icons
 
 ## Features
 - Search by city
