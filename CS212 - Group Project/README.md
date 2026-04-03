@@ -5,7 +5,7 @@
 - Evan Paddock – Location Input
 - James Darcy – Weather Details
 - Nick Sondermeyer – Weather Display
-- Jacob Parks - Icons
+- Jacob Parks – Icons
 
 ## Features
 - Search by city
