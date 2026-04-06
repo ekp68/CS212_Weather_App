@@ -93,31 +93,30 @@ function updateUI(data) {
 }
 
 
+// Weather map data structure to replace if else statements
+const weatherMap = [
+    {key:"sun",         class:"sunny"},
+    {key:"cloud",       class:"cloudy"},
+    {key:"overcast",    class:"overcast"},
+    {key:"fog",         class:"fog"},
+    {key:"mist",        class:"mist"},
+    {key:"rain",        class:"rain"},
+    {key:"sleet",       class:"sleet"},
+    {key:"snow",        class:"snow"},
+    {key:"blizzard",    class:"blizzard"},
+    {key:"thunder",     class:"thunderstorm"}
+];
+
 function changeBackground(weather) {
     let body = $("#app-body");
     body.removeClass();
 
     const weatherCondition = weather.toLowerCase();
-    if (weatherCondition.includes("sun"))
-        body.addClass("sunny");
-    else if (weatherCondition.includes("cloud"))
-        body.addClass("cloudy");
-    else if (weatherCondition.includes("overcast"))
-        body.addClass("overcast");
-    else if (weatherCondition.includes("fog"))
-        body.addClass("fog");
-    else if (weatherCondition.includes("mist"))
-        body.addClass("mist");
-    else if (weatherCondition.includes("rain"))
-        body.addClass("rain");
-    else if (weatherCondition.includes("sleet"))
-        body.addClass("sleet");
-    else if (weatherCondition.includes("snow"))
-        body.addClass("snow");
-    else if (weatherCondition.includes("blizzard"))
-        body.addClass("blizzard");
-    else if (weatherCondition.includes("thunder"))
-        body.addClass("thunderstorm");
-    else
-        body.addClass("default-bg");
+    // Finds first object in weatherMap where its key is included in weatherCondition
+    const weatherMatch = weatherMap.find(
+        weather => weatherCondition.includes(weather.key)
+    );
+    // Adds the weather class to change the background, 
+    // Uses default-bg if there are no matches
+    body.addClass(weatherMatch ? weatherMatch.class : "default-bg");
 }
