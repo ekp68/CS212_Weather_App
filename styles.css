@@ -11,15 +11,43 @@ body {
 
 /* Weather-based backgrounds to be changed later */
 .sunny {
-    background: linear-gradient(to right, #fceabb, #f8b500);
+    background: linear-gradient(to bottom, #87CEEB, #FFD700);
 }
 
 .cloudy {
-    background: linear-gradient(to right, #bdc3c7, #2c3e50);
+    background: linear-gradient(to bottom, #B0C4DE, #D3D3D3);
 }
 
-.rainy {
-    background: linear-gradient(to right, #4b79a1, #283e51);
+.overcast {
+    background: linear-gradient(to bottom, #708090, #A9A9A9);
+}
+
+.mist {
+    background: linear-gradient(to bottom, #C9D6DF, #E2EAF4);
+}
+
+.fog {
+    background: linear-gradient(to bottom, #BDC3C7, #D5D8DC);
+}
+
+.rain {
+    background: linear-gradient(to bottom, #4A6FA5, #6B8CAE);
+}
+
+.sleet {
+    background: linear-gradient(to bottom, #7B96B2, #B8CDD9);
+}
+
+.snow {
+    background: linear-gradient(to bottom, #A8C0CC, #EEF2F7);
+}
+
+.blizzard {
+    background: linear-gradient(to bottom, #4A5568, #718096);
+}
+
+.thunderstorm {
+    background: linear-gradient(to bottom, #1A1A2E, #4A4E69);
 }
 
 .card {

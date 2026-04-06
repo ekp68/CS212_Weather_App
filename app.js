@@ -1,10 +1,10 @@
+// API Key
+const apiKey = "b03e12d39d3f4a9ebf3202858260204";
+
 $(document).ready(function () {
 
     // Default Background
     $("#app-body").addClass("default-bg");
-
-    // API Key
-    const apiKey = "b03e12d39d3f4a9ebf3202858260204";
 
     // Form Submission
     $("form").on("submit", function (event) {
@@ -94,18 +94,31 @@ $(document).ready(function () {
 
     function changeBackground(weather) {
         let body = $("#app-body");
+        body.removeClass();
 
-        body.removeClass("default-bg sunny cloudy rainy");
-
-        if (weather.toLowerCase().includes("sun")) {
+        const weatherCondition = weather.toLowerCase();
+        if (weatherCondition.includes("sun"))
             body.addClass("sunny");
-        } else if (weather.toLowerCase().includes("cloud")) {
+        else if (weatherCondition.includes("cloud"))
             body.addClass("cloudy");
-        } else if (weather.toLowerCase().includes("rain")) {
-            body.addClass("rainy");
-        } else {
+        else if (weatherCondition.includes("overcast"))
+            body.addClass("overcast");
+        else if (weatherCondition.includes("fog"))
+            body.addClass("fog");
+        else if (weatherCondition.includes("mist"))
+            body.addClass("mist");
+        else if (weatherCondition.includes("rain"))
+            body.addClass("rain");
+        else if (weatherCondition.includes("sleet"))
+            body.addClass("sleet");
+        else if (weatherCondition.includes("snow"))
+            body.addClass("snow");
+        else if (weatherCondition.includes("blizzard"))
+            body.addClass("blizzard");
+        else if (weatherCondition.includes("thunder"))
+            body.addClass("thunderstorm");
+        else
             body.addClass("default-bg");
-        }
     }
 
 });
