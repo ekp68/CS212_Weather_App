@@ -114,9 +114,9 @@ function changeBackground(weather) {
     const weatherCondition = weather.toLowerCase();
     // Finds first object in weatherMap where its key is included in weatherCondition
     const weatherMatch = weatherMap.find(
-        weather => weatherCondition.includes(weather.key)
+        weatherOject => weatherCondition.includes(weatherOject.key)
     );
     // Adds the weather class to change the background, 
-    // Uses default-bg if there are no matches
+    // Uses default-bg if there are no matches (undefined return)
     body.addClass(weatherMatch ? weatherMatch.class : "default-bg");
 }
