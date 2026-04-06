@@ -100,11 +100,11 @@ const weatherMap = [
     {key:"overcast",    class:"overcast"},
     {key:"fog",         class:"fog"},
     {key:"mist",        class:"mist"},
+    {key:"thunder",     class:"thunderstorm"},
     {key:"rain",        class:"rain"},
     {key:"sleet",       class:"sleet"},
     {key:"snow",        class:"snow"},
-    {key:"blizzard",    class:"blizzard"},
-    {key:"thunder",     class:"thunderstorm"}
+    {key:"blizzard",    class:"blizzard"}
 ];
 
 function changeBackground(weather) {
