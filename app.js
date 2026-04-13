@@ -54,6 +54,9 @@ function updateUI(data) {
     // Sky condition
     $("#sky").text(data.current.condition.text);
 
+    // Weather Icons
+    setWeatherIcon(data.current.condition.text);
+
     // Humidity & Wind
     $("#humidity").text(data.current.humidity);
     $("#wind").text(data.current.wind_mph);
@@ -106,6 +109,20 @@ const weatherMap = [
     {key:"snow",        class:"snow"},
     {key:"blizzard",    class:"blizzard"}
 ];
+
+// Weather map function for weather icons
+function setWeatherIcon(weatherText) {
+    const condition = weatherText.toLowerCase();
+
+    const match = weatherMap.find(obj =>
+        condition.includes(obj.key)
+    );
+
+    // Use the class name to determine icon file
+    const iconFile = match ? match.class + ".png" : "sunny.png";
+
+    $("#weatherIcon").attr("src", "images/" + iconFile);
+}
 
 function changeBackground(weather) {
     let body = $("#app-body");
