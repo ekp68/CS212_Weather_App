@@ -6,6 +6,9 @@ $(document).ready(function () {
     // Default Background
     $("#app-body").addClass("default-bg");
 
+    // Get user's location on page load
+    getLocation();
+
     // Form Submission
     $("form").on("submit", function (event) {
         event.preventDefault();
@@ -119,4 +122,17 @@ function changeBackground(weather) {
     // Adds the weather class to change the background, 
     // Uses default-bg if there are no matches (undefined return)
     body.addClass(weatherMatch ? weatherMatch.class : "default-bg");
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            fetchWeather(`${lat},${lon}`);
+        }, function(error) {
+            console.error("Geolocation error:", error);
+            alert("Unable to retrieve your location. Please allow location access or enter a city/zip code manually.");
+        });
+    }
 }
