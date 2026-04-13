@@ -1,6 +1,9 @@
 // API Key
 const apiKey = "b03e12d39d3f4a9ebf3202858260204";
 
+// Global variable to track day/night status
+let isNight = false;
+
 $(document).ready(function () {
 
     // Default Background
@@ -35,6 +38,7 @@ function fetchWeather(location) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
+            isNight = (data.current.is_day === 0);
             updateUI(data);
         })
         .catch(error => {
@@ -57,8 +61,8 @@ function updateUI(data) {
     // Sky condition
     $("#sky").text(data.current.condition.text);
 
-    // Weather Icons
-    setWeatherIcon(data.current.condition.text);
+    // Weather Icons and Background
+    setIconAndBackground(data.current.condition.text);
 
     // Humidity & Wind
     $("#humidity").text(data.current.humidity);
@@ -94,8 +98,6 @@ function updateUI(data) {
     };
 
     $("#air-quality").text(`${aqi} – ${aqiLabels[aqi]}`);
-
-    changeBackground(data.current.condition.text);
 }
 
 
@@ -113,32 +115,39 @@ const weatherMap = [
     {key:"blizzard",    class:"blizzard"}
 ];
 
-// Weather map function for weather icons
-function setWeatherIcon(weatherText) {
-    const condition = weatherText.toLowerCase();
+function setIconAndBackground(weather) {
+    let body = $("#app-body");
+    body.removeClass();
 
+    const condition = weather.toLowerCase();
+
+    // Finds first object in weatherMap where its key is included in condition
     const match = weatherMap.find(obj =>
         condition.includes(obj.key)
     );
 
-    // Use the class name to determine icon file
-    const iconFile = match ? match.class + ".png" : "sunny.png";
+    // Use the class name to determine base, defaults to sunny if no match found
+    let base = match ? match.class : "sunny";
 
+    // Check for nighttime and adjust base if necessary
+    if (isNight) {
+        if (base === "sunny") {
+            // Future: Update base when night icons are added
+            // base = "clear-night";
+            console.log("Nighttime detected, but no clear night icon available. Using sunny icon as fallback.");
+        } else if (base === "cloudy") {
+            // Future: Update base when night icons are added
+            // base = "cloudy-night";
+            console.log("Nighttime detected, but no cloudy night icon available. Using cloudy icon as fallback.");
+        }
+    }
+
+    // Apply background    
+    body.addClass(base);
+
+    // Set icon
+    const iconFile = `${base}.png`;
     $("#weatherIcon").attr("src", "images/" + iconFile);
-}
-
-function changeBackground(weather) {
-    let body = $("#app-body");
-    body.removeClass();
-
-    const weatherCondition = weather.toLowerCase();
-    // Finds first object in weatherMap where its key is included in weatherCondition
-    const weatherMatch = weatherMap.find(
-        weatherOject => weatherCondition.includes(weatherOject.key)
-    );
-    // Adds the weather class to change the background, 
-    // Uses default-bg if there are no matches (undefined return)
-    body.addClass(weatherMatch ? weatherMatch.class : "default-bg");
 }
 
 function getLocation() {

@@ -50,6 +50,14 @@ body {
     background: linear-gradient(to bottom, #1A1A2E, #4A4E69);
 }
 
+.clear-night {
+    background: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
+}
+
+.cloudy-night {
+    background: linear-gradient(to bottom, #646566, #203A43, #2C5364);
+}
+
 .card {
     background: rgba(0, 0, 0, 0.5);
     border: none;
