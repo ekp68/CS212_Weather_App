@@ -55,3 +55,10 @@ body {
     border: none;
     color: white;
 }
+
+#weatherIcon {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 15px auto;
+}
