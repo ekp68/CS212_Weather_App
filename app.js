@@ -129,13 +129,10 @@ function setIconAndBackground(weather) {
     // Check for nighttime and adjust base if necessary
     if (isNight) {
         if (base === "sunny") {
-            // Future: Update base when night icons are added
-            // base = "clear-night";
-            console.log("Nighttime detected, but no clear night icon available. Using sunny icon as fallback.");
-        } else if (base === "cloudy") {
-            // Future: Update base when night icons are added
-            // base = "cloudy-night";
-            console.log("Nighttime detected, but no cloudy night icon available. Using cloudy icon as fallback.");
+            base = "clear-night";
+        } 
+        else if (base === "cloudy") {
+            base = "cloudy-night";
         }
     }
 
