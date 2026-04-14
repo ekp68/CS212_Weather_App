@@ -27,7 +27,6 @@ $(document).ready(function () {
     });
 });
 
-
 // Fetch weather data from WeatherAPI
 function fetchWeather(location) {
     const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
@@ -43,7 +42,6 @@ function fetchWeather(location) {
             alert("Unable to retrieve weather data.");
         });
 }
-
 
 // Update all UI elements
 function updateUI(data) {
@@ -97,7 +95,6 @@ function updateUI(data) {
     $("#air-quality").text(`${aqi} – ${aqiLabels[aqi]}`);
 }
 
-
 // Weather map data structure to replace if else statements
 const weatherMap = [
     {key:"sun",         class:"sunny"},
@@ -113,7 +110,7 @@ const weatherMap = [
 ];
 
 function setIconAndBackground(weather) {
-    let body = $("#app-body");
+    const body = $("#app-body");
     body.removeClass();
 
     const condition = weather.toLowerCase();
