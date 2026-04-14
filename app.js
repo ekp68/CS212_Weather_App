@@ -1,9 +1,6 @@
 // API Key
 const apiKey = "b03e12d39d3f4a9ebf3202858260204";
 
-// Global variable to track day/night status
-let isNight = false;
-
 $(document).ready(function () {
 
     // Default Background
@@ -57,7 +54,7 @@ function updateUI(data) {
     $("#sky").text(data.current.condition.text);
 
     // Weather Icons and Background
-    setIconAndBackground(data.current.condition.text);
+    setIconAndBackground(data.current);
 
     // Humidity & Wind
     $("#humidity").text(data.current.humidity);
@@ -113,7 +110,7 @@ function setIconAndBackground(weather) {
     const body = $("#app-body");
     body.removeClass();
 
-    const condition = weather.toLowerCase();
+    const condition = weather.condition.text.toLowerCase();
 
     // Finds first object in weatherMap where its key is included in condition
     const match = weatherMap.find(obj =>
@@ -124,6 +121,7 @@ function setIconAndBackground(weather) {
     let base = match ? match.class : "sunny";
 
     // Check for nighttime and adjust base if necessary
+    isNight = weather.is_day === 0;
     if (isNight) {
         if (base === "sunny") {
             base = "clear-night";
