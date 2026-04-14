@@ -140,3 +140,18 @@ function setIconAndBackground(weather) {
     const iconFile = `${base}.png`;
     $("#weatherIcon").attr("src", "images/" + iconFile);
 }
+
+function saveWeatherData(data)
+{
+    const key = `${data.location.lat}, ${data.location.lon}`;
+    sessionStorage.setItem(key, JSON.stringify(data));
+}
+
+function loadWeatherData(key)
+{
+    const dataString = sessionStorage.getItem(key);
+    if (!dataString) return null;
+    const data = JSON.parse(dataString);
+
+    return data;
+}
