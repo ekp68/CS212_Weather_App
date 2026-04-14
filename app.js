@@ -121,7 +121,7 @@ function setIconAndBackground(weather) {
     let base = match ? match.class : "sunny";
 
     // Check for nighttime and adjust base if necessary
-    isNight = weather.is_day === 0;
+    const isNight = weather.is_day === 0;
     if (isNight) {
         if (base === "sunny") {
             base = "clear-night";
