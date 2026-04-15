@@ -7,7 +7,7 @@ $(document).ready(function () {
     const previousData = loadWeatherData();
     if (previousData) {
         fetchWeather(previousData);
-        console.log("Loaded previous weather data");
+        createAlert("Loaded previous weather data");
     }
 
     // Default Background
