@@ -1,10 +1,14 @@
 // API Key
 const apiKey = "b03e12d39d3f4a9ebf3202858260204";
 
-// Global variable to track day/night status
-let isNight = false;
-
 $(document).ready(function () {
+
+    // Load previous weather data if available
+    const previousData = loadWeatherData();
+    if (previousData) {
+        fetchWeather(previousData);
+        console.log("Loaded previous weather data");
+    }
 
     // Default Background
     $("#app-body").addClass("default-bg");
@@ -26,7 +30,7 @@ $(document).ready(function () {
 
         // API Integration
         fetchWeather(location)
-        console.log("Search for:", location);
+        console.log("Searching for:", location);
     });
 });
 
@@ -37,8 +41,8 @@ function fetchWeather(location) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            isNight = (data.current.is_day === 0);
             updateUI(data);
+            saveWeatherData(data);
         })
         .catch(error => {
             console.error("Weather API error:", error);
@@ -60,7 +64,7 @@ function updateUI(data) {
     $("#sky").text(data.current.condition.text);
 
     // Weather Icons and Background
-    setIconAndBackground(data.current.condition.text);
+    setIconAndBackground(data.current);
 
     // Humidity & Wind
     $("#humidity").text(data.current.humidity);
@@ -116,7 +120,7 @@ function setIconAndBackground(weather) {
     const body = $("#app-body");
     body.removeClass();
 
-    const condition = weather.toLowerCase();
+    const condition = weather.condition.text.toLowerCase();
 
     // Finds first object in weatherMap where its key is included in condition
     const match = weatherMap.find(obj =>
@@ -127,6 +131,7 @@ function setIconAndBackground(weather) {
     let base = match ? match.class : "sunny";
 
     // Check for nighttime and adjust base if necessary
+    const isNight = weather.is_day === 0;
     if (isNight) {
         if (base === "sunny") {
             base = "clear-night";
@@ -155,4 +160,16 @@ function getLocation() {
             alert("Unable to retrieve your location. Please allow location access or enter a city/zip code manually.");
         });
     }
+  
+function saveWeatherData(data) {
+    const coords = `${data.location.lat}, ${data.location.lon}`;
+    localStorage.setItem("Location", JSON.stringify(coords));
+}
+
+function loadWeatherData() {
+    const dataString = localStorage.getItem("Location");
+    if (!dataString) return null;
+    const data = JSON.parse(dataString);
+
+    return data;
 }
