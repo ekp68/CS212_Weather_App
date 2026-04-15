@@ -149,18 +149,6 @@ function setIconAndBackground(weather) {
     $("#weatherIcon").attr("src", "images/" + iconFile);
 }
 
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            fetchWeather(`${lat},${lon}`);
-        }, function(error) {
-            console.error("Geolocation error:", error);
-            alert("Unable to retrieve your location. Please allow location access or enter a city/zip code manually.");
-        });
-    }
-  
 function saveWeatherData(data) {
     const coords = `${data.location.lat}, ${data.location.lon}`;
     localStorage.setItem("Location", JSON.stringify(coords));
@@ -172,4 +160,17 @@ function loadWeatherData() {
     const data = JSON.parse(dataString);
 
     return data;
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            fetchWeather(`${lat},${lon}`);
+        }, function(error) {
+            console.error("Geolocation error:", error);
+            alert("Unable to retrieve your location. Please allow location access or enter a city/zip code manually.");
+        });
+    }
 }
