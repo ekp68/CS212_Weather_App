@@ -31,7 +31,6 @@ function fetchWeather(location) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            isNight = (data.current.is_day === 0);
             updateUI(data);
         })
         .catch(error => {
