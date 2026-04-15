@@ -13,8 +13,10 @@ $(document).ready(function () {
     // Default Background
     $("#app-body").addClass("default-bg");
 
-    // Get user's location on page load
-    getLocation();
+    // Get Location Button    
+    $("#getLocationBtn").on("click", function() {
+        getLocation();
+    });
 
     // Form Submission
     $("form").on("submit", function (event) {
