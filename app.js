@@ -3,6 +3,13 @@ const apiKey = "b03e12d39d3f4a9ebf3202858260204";
 
 $(document).ready(function () {
 
+    // Load previous weather data if available
+    const previousData = loadWeatherData();
+    if (previousData) {
+        fetchWeather(previousData);
+        console.log("Loaded previous weather data");
+    }
+
     // Default Background
     $("#app-body").addClass("default-bg");
 
@@ -20,7 +27,7 @@ $(document).ready(function () {
 
         // API Integration
         fetchWeather(location)
-        console.log("Search for:", location);
+        console.log("Searching for:", location);
     });
 });
 
@@ -32,6 +39,7 @@ function fetchWeather(location) {
         .then(response => response.json())
         .then(data => {
             updateUI(data);
+            saveWeatherData(data);
         })
         .catch(error => {
             console.error("Weather API error:", error);
@@ -138,15 +146,13 @@ function setIconAndBackground(weather) {
     $("#weatherIcon").attr("src", "images/" + iconFile);
 }
 
-function saveWeatherData(data)
-{
-    const key = `${data.location.lat}, ${data.location.lon}`;
-    sessionStorage.setItem(key, JSON.stringify(data));
+function saveWeatherData(data) {
+    const coords = `${data.location.lat}, ${data.location.lon}`;
+    localStorage.setItem("Location", JSON.stringify(coords));
 }
 
-function loadWeatherData(key)
-{
-    const dataString = sessionStorage.getItem(key);
+function loadWeatherData() {
+    const dataString = localStorage.getItem("Location");
     if (!dataString) return null;
     const data = JSON.parse(dataString);
 
