@@ -176,3 +176,21 @@ function getLocation() {
         });
     }
 }
+
+function createAlert(message) {
+    const alertDiv = $(`
+        <div class="alert alert-primary alert-slide-down" role="alert">
+            ${message}
+        </div>
+    `);
+
+    $("#alertContainer").append(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.removeClass("alert-slide-down").addClass("alert-slide-up");
+    }, 2000);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 2300);
+}
