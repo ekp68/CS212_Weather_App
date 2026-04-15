@@ -13,6 +13,11 @@ $(document).ready(function () {
     // Default Background
     $("#app-body").addClass("default-bg");
 
+    // Get Location Button    
+    $("#getLocationBtn").on("click", function() {
+        getLocation();
+    });
+
     // Form Submission
     $("form").on("submit", function (event) {
         event.preventDefault();
@@ -157,4 +162,17 @@ function loadWeatherData() {
     const data = JSON.parse(dataString);
 
     return data;
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            fetchWeather(`${lat},${lon}`);
+        }, function(error) {
+            console.error("Geolocation error:", error);
+            alert("Unable to retrieve your location. Please allow location access or enter a city/zip code manually.");
+        });
+    }
 }
