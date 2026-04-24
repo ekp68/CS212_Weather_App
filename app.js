@@ -77,6 +77,14 @@ function updateUI(data) {
 
     // Precipitation
     $("#precipitation").text(data.current.precip_in);
+   
+    //Dew Point
+        $("#dew-point").text(
+      `${Math.round(data.current.dewpoint_f)}`
+    );
+
+    // Pressure
+    $("#pressure").text(data.current.pressure_mb);
 
     // UV Index + Risk
     const uvValue = data.current.uv;
